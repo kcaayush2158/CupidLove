@@ -1,0 +1,97 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <link th:href="@{/static/assets/css/navbar.css}" href="/static/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+    <title>Signup</title>
+</head>
+<style>
+   #signup-form{
+       margin-top:120px;
+   }
+</style>
+<body>
+<header th:insert="header.html ::  nav"></header>
+<div th:if="${param.success}">
+    <div class="alert alert-info">You've successfully registered to our awesome app!</div>
+</div>
+<div th:if="${param.logout}">
+    <div class="alert alert-info">You've successfully logout</div>
+</div>
+
+
+<div class="container col-lg-5" id="signup-form">
+    <!--/*@thymesVar id="userRegistration" type="com.application.springboot.model.UserRegistration      "*/-->
+    <form method="POST" action="#" th:action="@{/signup}" th:object="${user}" >
+        <h2 class="text-center" style="font-size:33px;">
+            <strong>Account Signup</strong>
+            <hr class="col-lg-5 mb-4">
+        </h2>
+        <div role="alert" th:if="${message}">
+            <div class="alert alert-warning" th:text="${message}" role="alert">
+            </div>
+        </div>
+        <div role="alert" th:if="${error}">
+            <div class="alert alert-primary" th:text="${error}" role="alert">
+            </div>
+        </div>
+        <br><br>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-lg-6">
+                    <!--  ===============================================First Name input field ========================================-->
+                    <div class="form-group">
+                        <label for="firstName">First Name: </label>
+                        <input name="firstName" th:field="*{firstName}" type="text" id="firstName" class="form-control mb-2 form-control-lg"  />
+                        <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-remove" ></span>Invalid First Name</div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="lastname">Last Name: </label>
+                        <input name="lastname" th:field="*{lastName}" id="lastname" type="text" class="form-control mb-2 form-control-lg" autofocus />
+                        <div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" class=" alert alert-danger" role="alert" ><span class="glyphicon glyphicon-remove" ></span>Invalid Last Name</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="username">Username: </label>
+            <input th:field="*{username}"  name="email" id="username" type="text" class="form-control mb-2 form-control-lg" autofocus />
+            <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}" class="alert alert-danger"  role="alert"><span class="glyphicon glyphicon-remove" role="alert"></span>Invalid Username</div>
+        </div>
+
+        <!--  ===============================================Email field ========================================-->
+        <div class="form-group">
+            <label for="email">Email: </label>
+            <input th:field="*{email}" pattern="^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$" name="email" id="email" type="text" class="form-control mb-2 form-control-lg" autofocus required />
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="alert alert-danger"  role="alert"><span class="glyphicon glyphicon-remove" role="alert"></span>Invalid password</div>
+        </div>
+
+                <!--  ===============================================Password input field ========================================-->
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="password">Password: </label>
+                        <input th:field="*{password}" pattern="^((?!.*[^a-zA-Z\d])(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{5,20})$" name="password" id="password" type="password" class="form-control mb-2 form-control-lg" />
+                        <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="alert alert-danger" role="alert"><span class="glyphicon glyphicon-remove" ></span>Invalid password</div>
+                    </div>
+                </div>
+
+
+
+        <!--  =============================================== Form submit button  field ========================================-->
+        <button class="btn btn-block btn-lg btn-success form-control-lg form-control mb-5 mt-5" type="submit">Sign Up</button>
+    </form>
+</div>
+<footer th:insert="footer.html :: footer"></footer>
+
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>

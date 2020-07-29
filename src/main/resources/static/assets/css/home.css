@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=PT+Sans+Narrow&display=swap');
+@import url('https://fonts.googleapis.com/css?family=PT+Sans|PT+Sans+Narrow&display=swap');
+.card-text{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 4;
+    overflow: hidden;
+}
+.justify-content-center {
+    height: 8%;
+    -webkit-box-pack: center!important;
+    background-color: #f8f9fa;
+    -ms-flex-pack: center!important;
+    justify-content: center!important;
+    padding: 1%;
+}
+
+body{
+    background-color : #f1f2f5;
+}
+
+.card-title{
+    font-family: 'Lato', sans-serif;
+}
+.card-text{
+    font-family: 'Lato', sans-serif;
+}
+.card-body{
+    background-color: white;
+}
+.card{
+    border-radius: 20px;
+}
+a.custom-card,
+a.custom-card:hover {
+    color: inherit;
+    text-decoration: none;
+}
+#margin-fragment{
+    margin-top:100px;
+}
+
+
+
+
+/* Style page content */
+.main {
+    margin-left: 160px; /* Same as the width of the sidebar */
+    padding: 0px 10px;
+}
+
+/* On smaller screens, where height is less than 450px, change the style of the sidebar (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+    .sidenav a {font-size: 18px;}
+}
+

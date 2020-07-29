@@ -1,0 +1,69 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+/*Changing the hight of the navbar*/
+nav{
+    height:100px;
+}
+
+.navigation-clean-button{
+    background:#fff;
+    padding-top:.75rem;
+    padding-bottom:.75rem;
+    color:#333;
+}
+
+
+.navbar{
+    height:100px;
+}
+a{
+    list-style-type: none;
+    text-decoration: none;
+}
+
+/*navbar item  */
+.nav-bar{
+    list-style-type: none;
+    text-decoration: none;
+    color: #077aec;
+    font-size: 20px;
+}
+.nav-bar:hover{
+    list-style-type: none;
+    text-decoration: none;
+    color: #eb4034;
+    font-size: 20px;
+}
+
+
+.dropdown{
+    text-decoration: none;
+    padding: 100px;
+    list-style-type: none;
+}
+
+.nav-link:hover{
+    text-decoration: none;
+    list-style-type: none;
+    color: #00C9A7;
+}
+
+
+
+
+.search-header {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 82px;
+    margin-top: 500px;
+}
+
+
+/*social login button*/
+.btn-google {
+    color: white;
+    background-color: #ea4335;
+}
+
+.btn-facebook {
+    color: white;
+    background-color: #3b5998;
+}

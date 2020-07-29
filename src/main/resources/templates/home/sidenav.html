@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" th:href="@{/assets/css/sidnav.css}">
+    <meta charset="UTF-8">
+</head>
+<style>
+    .custom-anchor{
+        font-weight:500;
+        color: black;
+        padding: 25px;
+        font-size:20px;
+        list-style-type: none;
+        text-decoration: none;
+        margin-bottom: 20px;
+    }
+</style>
+<body>
+<div th:fragment="sidenav" style=" margin-top: 150px;">
+<div class="sidenav"  >
+    <a th:href="@{/profile}" class="custom-anchor mt-3 mb-3" style="font-weight:500;color: black; padding: 25px;  font-size:20px;list-style-type: none;text-decoration: none; " ><img src="https://img.icons8.com/color/48/000000/contract-job.png" height="36" /> Profile</a><br><br>
+    <a th:href="@{/chatroom}" style="font-weight:500;color: black; padding: 25px;  font-size:20px;list-style-type: none;text-decoration: none;   margin-bottom: 20px;" th:class="custom-anchor" class="custom-anchor mt-3 mb-3"><img src="https://image.flaticon.com/icons/png/512/566/566487.png" height="36" /> Public Room</a><br><br>
+    <a href="#" class="custom-anchor mt-3 mb-3"  style="font-weight:500;color: black; padding: 25px;  font-size:20px;list-style-type: none;text-decoration: none; "th:class="custom-anchor"><img src="https://img.icons8.com/color/48/000000/youtube-live.png" height="36" /> Live Broadcast</a><br><br>
+    <a href="#" class="custom-anchor mt-3 mb-3" style="font-weight:500;color: black; padding: 25px;  font-size:20px;list-style-type: none;text-decoration: none; " th:href="@{/settings}"><img src="https://img.icons8.com/color/48/000000/horizontal-settings-mixer.png" height="36" /> Settings</a><br><br>
+    <a th:href="@{/logout}" class="custom-anchor mt-3 mb-3 text-center " style=" font-weight:500;color: black; font-size: 20px; background-color:#00C9A7; color:white; border-radius: 50px; padding:10px;list-style-type: none;text-decoration: none;display: block;"  > <i class="fas fa-sign-out-alt"></i> Logout</a><br>
+</div>
+</div>
+<!-- Page content -->
+<div class="main">
+
+</div>
+</body>
+</html>

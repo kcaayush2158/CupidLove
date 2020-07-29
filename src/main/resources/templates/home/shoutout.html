@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Title</title>
+    <link  rel="stylesheet"/>
+</head>'
+<body>
+<header th:insert="header.html ::  nav"></header>
+<div class="container-fluid">
+    <div class="col-lg-6">
+        <div class="row">
+            <div class="col-lg-3">
+            </div>
+            <div class="col-md-8">
+                <div class="card text-white bg-danger mr-5" style=" height: 500px; position: fixed; ">
+                    <div class="card-header"> Shout Out </div>
+                    <div class="card-body">
+                        <div class="card-body">
+                            <p class="card-text">
+                                <div class="col-12">
+                                    <div class="row">
+                                        <div class="col-md-3">
+
+                                        </div>
+                                        <div class="col-md-9">
+                                            <button id="connect" onclick="webSocket.connect();">Connect</button>
+                                            <button id="disconnect" disabled="disabled" onclick="webSocket.disconnect();">
+                                                Disconnect
+                                            </button>
+                            <p id="response" style="color: black;"></p>
+                        </div>
+                    </div>
+                    <form id="messages">
+                        <div class="row">
+                            <div class="col-md-10">
+                                <input type="text" class="form-control" placeholder="Enter your message" id="chatMessage">
+                            </div>
+                            <div class="col-md-2">
+                                <button id="sendMessage" onclick="webSocket.sendMessage()" class="btn btn-danger" value="submit">Shout!!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+<script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.1.4/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+<script>
+    document.querySelector("#messages").addEventListener('submit', (event) => {
+        event.preventDefault();
+    })
+
+    class WebSocketController {
+
+        constructor() {
+            this._onConnected = this._onConnected.bind(this);
+        }
+
+        _onConnected(frame) {
+            this.setConnected(true);
+            console.log('Connected: ' + frame);
+            this.stompClient.subscribe('/topic/shout', this.showMessage);
+        }
+
+        setConnected(connected) {
+            document.getElementById('connect').disabled = connected;
+            document.getElementById('disconnect').disabled = !connected;
+            document.getElementById('messages').style.visibility = connected ? 'visible' : 'hidden';
+            document.getElementById('response').innerHTML = '';
+        }
+
+        connect() {
+            var socket = new SockJS('/shout');
+            this.stompClient = Stomp.over(socket);
+            this.stompClient.connect({}, this._onConnected);
+        }
+
+        disconnect() {
+            if (this.stompClient != null) {
+                this.stompClient.disconnect();
+            }
+            this.setConnected(false);
+            console.log("Disconnected");
+        }
+
+        sendMessage() {
+            var message = document.getElementById('chatMessage').value;
+            this.stompClient.send("/app/shout", {}, message);
+        }
+
+        showMessage(message) {
+            var response = document.getElementById('response');
+            var p = document.createElement('li');
+            p.style.wordWrap = 'break-word';
+            p.appendChild(document.createTextNode(message.body));
+            response.appendChild(p);
+        }
+
+    }
+    var webSocket = new WebSocketController();
+</script>
+</body>
+</html>

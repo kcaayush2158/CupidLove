@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/css/lightbox.min.css">
+</head>
+<style>
+    .color-green{
+      color: green;
+    }
+    .color-red{
+        color: red;
+    }
+
+</style>
+<body>
+    <header th:insert="header.html ::  nav"></header>
+    <div class="container-fluid">
+        <div class="col-lg-12">
+            <div class="row">
+                <div class="col-lg-2" >
+                    <div style="position: fixed; " th:insert="home/sidenav.html ::  sidenav"></div>
+                </div>
+                <div class="col-lg-10 ">
+                    <br><br><br><br><br>
+                    <nav class="navbar navbar-light bg-light">
+                        <a class="navbar-brand" href="#" th:text="${users.getFirstName()} + ' ' + ${users.getLastName()}+ ',' + ${users.getAboutMe().getAge()}" ></a>
+                        <form class="form-inline">
+                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#exampleModalLong">
+                                <i class="fas fa-cog"></i>
+                            </button>
+                        </form>
+                    </nav>
+                    <div style="margin-bottom:40px; margin-top: 40px;">
+
+                        <div class="container">
+
+                            <div >
+                               <center>
+                                   <img class="center " th:src="@{ ${users.getProfilePhoto()} }" height="150">
+                               </center>
+
+                                <h1 class="text-center" th:text="${users.getFirstName()} + ' ' + ${users.getLastName()}+ ',' + ${users.getAboutMe().getAge()}"></h1>
+                                <!-- Modal -->
+                                <p class="text-center" th:text="${users.getAboutMe().getBio()}" style="font-family: 'Poppins', sans-serif; font-size: 20px"></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="col-lg-12">
+                            <div class="media-header">
+                                <h5>Medias</h5>
+                            </div>
+                            <div class="media-footer">
+                                <div th:each="photo :${photos}">
+                                    <img th:src="@{''+${photo}}" height="50" width="50">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div style="margin-bottom:20px;">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control input-form-lg" placeholder="Enter message ">
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button
+                                                    class="btn btn-success btn-block" type="button">
+                                                <i class="fa fa-envelope-o"></i>&nbsp;Send a Message</button>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <button class="btn btn-primary btn-block" type="button"><i class="fa fa-video-camera"></i>&nbsp;Video Chat&nbsp;</button>
+                                        </div>
+                                        <hr>
+                                    </div>
+
+                                    <div class="modal fade" role="dialog" tabindex="-1">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title"></h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                                                <div class="modal-body">
+                                                    <p>The content of your modal.</p>
+                                                </div>
+                                                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal fade" role="dialog" tabindex="-1">
+                                        <div class="modal-dialog" role="document">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title">Modal Title</h4><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button></div>
+                                                <div class="modal-body">
+                                                    <p>The content of your modal.</p>
+                                                </div>
+                                                <div class="modal-footer"><button class="btn btn-light" type="button" data-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="container">
+                        <div class="intro">
+<!--                            <h2 class="text-center" style="margin-top:10px;margin-bottom:20px;">Images</h2>-->
+                            <p class="text-center"></p>
+                        </div>
+<!--                        <div class="row photos">-->
+<!--                            <div class="col-sm-6 col-md-4 col-lg-3 item"><a   data-lightbox="photos"><img class="img-fluid" src="../../../../uploads/aayushkc2158/bike.jpg"></a></div>-->
+<!--                            <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="assets/img/building.jpg" data-lightbox="photos"><img class="img-fluid" src="assets/img/building.jpg"></a></div>-->
+<!--                            <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="assets/img/loft.jpg" data-lightbox="photos"><img class="img-fluid" src="assets/img/loft.jpg"></a></div>-->
+<!--                            <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="assets/img/building.jpg" data-lightbox="photos"><img class="img-fluid" src="assets/img/building.jpg"></a></div>-->
+<!--                            <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="assets/img/loft.jpg" data-lightbox="photos"><img class="img-fluid" src="assets/img/loft.jpg"></a></div>-->
+<!--                            <div class="col-sm-6 col-md-4 col-lg-3 item"><a href="assets/img/desk.jpg" data-lightbox="photos"><img class="img-fluid" src="assets/img/desk.jpg"></a></div>-->
+<!--                        </div>-->
+
+                    </div>
+                    <div>
+
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h2 class="text-center text-danger card-title">About Me</h2>
+                                            <div class="table-responsive">
+                                                <table class="table ">
+
+                                                    <tbody>
+                                                    <tr class="thead-dark">
+                                                        <td></td>
+                                                        <td th:if="${users.getAboutMe().getGender() == 'Male'}">About Him </td>
+                                                        <td  th:if="${users.getAboutMe().getGender() == 'Female'}">About Her</td>
+                                                        <td> About you </td>
+
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Live in :</td>
+                                                        <td th:text="${users.getAboutMe().getLiveIn()}" class="text-bold"></td>
+
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getLiveIn()}"></td>
+                                                        </div>
+
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getLiveIn()}"></td>
+                                                        </div>
+                                                        <td>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Country</td>
+                                                        <td th:text="${users.getAboutMe().getCountry()}" class="text-bold"></td>
+                                                        <div th:if="${users.getAboutMe().getCountry()} == ${currentUser.getAboutMe().getCountry()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getCountry()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getCountry()}"></td>
+                                                        </div>
+                                                        <td>
+                                                    <tr scope="row">
+                                                        <td>Body type:</td>
+                                                        <td th:text="${users.getAboutMe().getBodyType()}" class="text-bold"></td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getBodyType()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getBodyType()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Work as :</td>
+                                                        <td th:text="${users.getAboutMe().getWorkAs()}" class="text-bold"></td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getWorkAs()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getWorkAs()}"></td>
+                                                        </div>
+
+                                                    <tr scope="row">
+                                                    <tr>
+                                                        <td>Have Kids:</td>
+                                                        <td th:text="${users.getAboutMe().getHaveKids()}" class="text-bold"></td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getHaveKids()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getHaveKids()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Education:</td>
+                                                        <td th:text="${users.getAboutMe().getEducation()}" class="text-bold">&nbsp;</td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getEducation()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getEducation()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Languages&nbsp;:</td>
+                                                        <td th:text="${users.getAboutMe().getLanguages()}" class="text-bold">&nbsp;</td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getLanguages()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getLanguages()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Smoke:</td>
+                                                        <td th:text="${users.getAboutMe().getSmoke()}" class="text-bold">&nbsp;</td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getSmoke()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getSmoke()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Drink:</td>
+                                                        <td th:text="${users.getAboutMe().getDrink()}" class="text-bold">&nbsp;</td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getDrink()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getDrink()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Relationship:</td>
+                                                        <td th:text="${users.getAboutMe().getRelationship()}" class="text-bold">&nbsp;</td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getRelationship()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getRelationship()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Height:</td>
+                                                        <td th:text="${users.getAboutMe().getHeight()}" class="text-bold"></td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getHeight()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getHeight()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Eyes:</td>
+                                                        <td th:text="${users.getAboutMe().getEyes()}" class="text-bold">&nbsp;</td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getEyes()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getEyes()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Hair:</td>
+                                                        <td th:text="${users.getAboutMe().getHair()}" class="text-bold">&nbsp;</td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getHair()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getHair()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    <tr scope="row">
+                                                        <td>Body type:</td>
+                                                        <td th:text="${users.getAboutMe().getBodyType()}" class="text-bold"></td>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} == ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-success" th:text="${currentUser.getAboutMe().getBodyType()}"></td>
+                                                        </div>
+                                                        <div th:if="${users.getAboutMe().getLiveIn()} != ${currentUser.getAboutMe().getLiveIn()}">
+                                                            <td class="table-danger" th:text="${currentUser.getAboutMe().getBodyType()}"></td>
+                                                        </div>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h2 class="text-center text-danger card-title">Looking For&nbsp;</h2>
+                                            <h6 class="text-muted card-subtitle mb-2"></h6>
+                                            <p class="card-text" th:text="${users.getAboutMe().getLookingFor()}"></p><a class="card-link" href="#"></a><a class="card-link" href="#"></a></div>
+                                        <div class="card-body">
+                                            <h6 class="text-muted card-subtitle mb-2"></h6><a class="card-link" href="#"></a><a class="card-link" href="#"></a></div>
+                                    </div>
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h2 class="text-center text-danger card-title">Infos</h2>
+                                            <p class="card-text"></p>
+                                            <div class="table-responsive">
+                                                <table class="table">
+                                                    <thead>
+                                                    <tr></tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr>
+                                                        <td>Visits</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Profile Created :</td>
+                                                        <td th:text="${users.getCreatedDate()} "></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>Last Connection:</td>
+                                                        <td></td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                        <div class="card-body"></div>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <h2 class="text-center text-danger">Interest</h2>
+                                </div>
+                                <div class="col-md-4" style="margin-left:20px;">
+                                    <div class="card"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div class="photo-gallery"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+    <script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
