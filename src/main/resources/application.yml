@@ -1,0 +1,11 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 22119547152-pt7rv77oiijbljo3imdbe4grkoc7pr2p.apps.googleusercontent.com
+            client-secret: gFYzi-1NDGMLucQWtNJCwoUo
+
+  ignored:
+    - "*.bundle.*"

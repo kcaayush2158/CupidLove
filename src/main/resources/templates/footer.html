@@ -1,0 +1,137 @@
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <link rel="stylesheet" th:href="@{/assets/css/footer.css}" type="text/css" media="all">
+    <body>
+<style>
+
+    .newsletter-subscribe{
+        color:#313437;
+        background-color:#fff;
+        padding:50px 0
+    }
+    .newsletter-subscribe p{
+        color:#7d8285;
+        line-height:1.5
+    }
+    .newsletter-subscribe h2{
+        font-size:24px;
+        font-weight:700;
+        margin-bottom:25px;
+        line-height:1.5;
+        padding-top:0;
+        margin-top:0;
+        color:inherit
+    }
+    .newsletter-subscribe .intro{
+        font-size:16px;
+        max-width:500px;
+        margin:0 auto 25px
+    }
+    .newsletter-subscribe .intro p{
+        margin-bottom:35px
+    }
+    .newsletter-subscribe form{
+        justify-content:center
+    }
+    .newsletter-subscribe form .form-control{
+        background:#eff1f4;
+        border:none;
+        border-radius:3px;
+        box-shadow:none;
+        outline:0;
+        color:inherit;
+        text-indent:9px;
+        height:45px;
+        margin-right:10px;
+        min-width:250px
+    }
+    .newsletter-subscribe form .btn{
+        padding:16px 32px;
+        border:none;
+        background:0 0;
+        box-shadow:none;
+        text-shadow:none;
+        opacity:.9;
+        text-transform:uppercase;
+        font-weight:700;
+        font-size:13px;
+        letter-spacing:0.4px;
+        line-height:1
+    }
+    .newsletter-subscribe form .btn:hover{
+        opacity:1
+    }
+    .newsletter-subscribe form .btn-primary{
+        background-color:#055ada!important;
+        color:#fff;
+        outline:0!important
+    }
+</style>
+<footer th:fragment="footer">
+    <div class="newsletter-subscribe">
+        <div class="container-fluid">
+            <div class="intro">
+                <h2 class="text-center" style="font-size:33px;">Subscribe for our Newsletter</h2>
+                <p class="text-center">Get notified about company news, updates and be the first get early access to the&nbsp;<strong>faster, simpler and smarter</strong>&nbsp;way of presenting.
+                    <br>
+                </p>
+            </div>
+            <form class="form-inline offset-md-4" method="post">
+                <div class="form-group">
+                    <input class="form-control" type="email" name="email" placeholder="Your Email" style="width:381px;">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary ml-2" type="submit">Subscribe </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- -->
+    <!-- Footer -->
+    <section id="footer">
+        <div class="container">
+            <div class="row text-center ">
+                <div class="col-xs-12 col-sm-4 col-md-8 col-lg-12">
+
+                    <ul class="list-unstyled quick-links">
+                        <li class="list-inline-item pr-1">Home</li>
+                        <li class="list-inline-item pr-1">About</li>
+                        <li class="list-inline-item pr-1">Terms & Conditions</li>
+                        <li class="list-inline-item pr-1">Privacy Policy</li>
+                        <li class="list-inline-item pr-1">Dating Securely</li>
+                        <li class="list-inline-item pr-1">Help Center</li>
+                        <li class="list-inline-item pr-1">Become A Partner</li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-5">
+                    <ul class="list-unstyled list-inline social text-center">
+                        <li class="list-inline-item"><i class="fa fa-facebook"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-twitter"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-instagram"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-google-plus"></i></li>
+                        <li class="list-inline-item"><i class="fa fa-envelope"></i></li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                    <h2>All right reserved</h2>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</footer>
+<!-- ./Footer -->
+</body>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</html>

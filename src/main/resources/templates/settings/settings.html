@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" integrity="sha384-v8BU367qNbs/aIZIxuivaU55N5GPF89WBerHoGA4QTcbUjYiLQtKdrfXnqAcXyTv" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+    <link th:href="@{/assets/css/navbar.css}" href="/assets/css/navbar.css" type="text/css" media="all" rel="stylesheet" />
+    <link th:href="@{/assets/css/sidenav.css}" href="/assets/css/sidenav.css" type="text/css" media="all" rel="stylesheet" />
+    <link th:href="@{/assets/css/settings.css}" href="/assets/css/settings.css" type="text/css" media="all" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Settings</title>
+</head>
+<style>
+
+</style>
+<body>
+<header th:insert="header.html ::  nav"></header>
+<div class="container-fluid mt-5">
+
+    <div class="col-lg-12">
+        <div class="row">
+            <div class="col-lg-2 "  >
+                <div style="position: fixed; " th:insert="home/sidenav.html ::  sidenav"></div>
+            </div>
+            <div class="col-lg-10 " >
+                <nav class="navbar navbar-light "  id="navbar" >
+                    <a class="navbar-brand mb-0 h1" href="#">Settings</a>
+
+
+                    <!-- Button trigger modal -->
+                </nav>
+
+        </div>
+    </div>
+</div>
+</body>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.0/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.8.2/js/lightbox.min.js"></script>
+<script src="https://kit.fontawesome.com/6f40d29aa1.js" crossorigin="anonymous"></script>
+<script th:src="@{/assets/js/header.js}" type="application/javascript" src="/assets/js/header.js"></script>
+<script th:src="@{/assets/js/settings.js}" type="application/javascript" src="/assets/js/settings.js"></script>
+</html>

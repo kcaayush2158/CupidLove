@@ -1,0 +1,34 @@
+.register-photo {
+    height: 100vh;
+    background: linear-gradient(to right, #047aed, #e9006581), url(https://i.pinimg.com/originals/41/e5/e5/41e5e50e8773bf8769dfa342e94685d9.jpg) repeat fixed 100%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+#subheading{
+    font-size:45px;
+}
+
+#heading{
+    font-size:80px;
+    font-weight: bold;
+}
+
+#paragraph{
+    font-size:40px;
+
+}
+#container-banner{
+    margin-top:300px;
+    color :white;
+}
+
+#container-banner-2{
+    height: auto;
+    padding-top:50px;
+    padding-bottom: 50px;
+}
+
+body{
+    overflow-x: hidden;
+}
