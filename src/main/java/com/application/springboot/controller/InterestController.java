@@ -29,7 +29,7 @@ public class InterestController {
     public ResponseEntity<Interests> saveInterest(@RequestParam("email")String email,@RequestParam("interest")String interest) throws  Exception{
         User user = userService.findExistingEmail(email);
         for(Interests existingData : interestService.findInterests(user)){
-            if(interest.equals(existingData.getInterests())){
+            if(existingData.getUser().getEmail().equals(email)){
                 throw  new Exception("DATA_EXISTED");
             }else{
                 Interests   interests = new Interests();
@@ -46,10 +46,10 @@ public class InterestController {
         Interests interests = interestService.findInterest(id);
         if(interests.getUser().getEmail().equals(email)){
             this.interestService.deleteInterest(id);
+            return ResponseEntity.ok().build();
         }else{
             throw new Exception("YOU_ARE_UNAUTHORIZED");
         }
-         return ResponseEntity.ok().build();
     }
 
 }
