@@ -25,7 +25,7 @@ public class InterestService {
         return  this.interestRepository.findInterestsById( id);
     }
     public void deleteInterest(int id){
-        this.interestRepository.deleteById(id);
+        this.interestRepository.deleteInterestsById(id);
     }
 
     public Interests saveInterest(Interests interest){

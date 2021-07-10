@@ -39,15 +39,19 @@ public class InterestController {
         return ResponseEntity.ok().body(interestService.saveInterest(interests));
     }
 
-    @DeleteMapping("/interest/delete")
+    @PostMapping("/interest/delete")
     public ResponseEntity<Void> deleteInterests(@RequestParam("email")String email, @RequestParam("id")int id) throws Throwable{
         Interests interests = interestService.findInterest(id);
+        System.out.println(interests);
         if(interests.getUser().getEmail().equals(email)){
-            this.interestService.deleteInterest(id);
-            return ResponseEntity.ok().build();
+            System.out.println("DELETING");
+            interestService.deleteInterest(id);
+
         }else{
             throw new Exception("YOU_ARE_UNAUTHORIZED");
         }
+        return ResponseEntity.ok().build();
     }
+
 
 }
