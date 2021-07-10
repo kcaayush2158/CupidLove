@@ -26,15 +26,22 @@ public class InterestController {
     }
 
     @PostMapping("/interest/save")
-    public ResponseEntity<Interests> saveInterest(@RequestParam("email")String email,@RequestParam("interest")String interest){
+    public ResponseEntity<Interests> saveInterest(@RequestParam("email")String email,@RequestParam("interest")String interest) throws  Exception{
         User user = userService.findExistingEmail(email);
-        Interests interests = new Interests();
-        interests.setInterests(interest);
-        interests.setUser(user);
-        return ResponseEntity.ok().body(this.interestService.saveInterest(interests));
+        Interests interests;
+        for(Interests existingData : interestService.findInterests(user)){
+            if(interest.equals(existingData.getInterests())){
+                throw  new Exception("DATA_EXISTED");
+            }else{
+                interests = new Interests();
+                interests.setInterests(interest);
+                interests.setUser(user);
+            }
+        }
+        return ResponseEntity.ok().body(this.interestService.saveInterest(interest));
     }
 
-    @GetMapping("/interest/delete")
+    @DeleteMapping("/interest/delete")
     public ResponseEntity<Void> deleteInterests(@RequestParam("email")String email, @RequestParam("id")int id) throws Throwable{
         User user = userService.findUserById(id);
         if(user.getEmail().equals(email)){
