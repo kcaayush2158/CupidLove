@@ -36,9 +36,10 @@ public class InterestController {
                 interests = new Interests();
                 interests.setInterests(interest);
                 interests.setUser(user);
+                return ResponseEntity.ok().body(this.interestService.saveInterest(interests));
             }
         }
-        return ResponseEntity.ok().body(this.interestService.saveInterest(interests));
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/interest/delete")
