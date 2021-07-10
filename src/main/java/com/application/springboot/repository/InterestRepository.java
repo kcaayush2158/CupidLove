@@ -11,4 +11,6 @@ import java.util.List;
 public interface InterestRepository extends JpaRepository<Interests,Integer> {
 
     List<Interests> findInterestsByUser(User user);
+
+    Interests findInterestsById(int id);
 }

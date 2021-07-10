@@ -43,8 +43,8 @@ public class InterestController {
 
     @DeleteMapping("/interest/delete")
     public ResponseEntity<Void> deleteInterests(@RequestParam("email")String email, @RequestParam("id")int id) throws Throwable{
-        User user = userService.findUserById(id);
-        if(user.getEmail().equals(email)){
+        Interests interests = interestService.findInterest(id);
+        if(interests.getUser().getEmail().equals(email)){
             this.interestService.deleteInterest(id);
         }else{
             throw new Exception("YOU_ARE_UNAUTHORIZED");

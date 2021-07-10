@@ -21,7 +21,9 @@ public class InterestService {
     public List<Interests> findInterests(User user){
         return  this.interestRepository.findInterestsByUser( user);
     }
-
+    public Interests findInterest(int id){
+        return  this.interestRepository.findInterestsById( id);
+    }
     public void deleteInterest(int id){
         this.interestRepository.deleteById(id);
     }
@@ -29,4 +31,6 @@ public class InterestService {
     public Interests saveInterest(Interests interest){
         return  this.interestRepository.save(interest);
     }
+
+
 }
