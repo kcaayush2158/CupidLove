@@ -29,7 +29,7 @@ public class InterestController {
     public ResponseEntity<Interests> saveInterest(@RequestParam("email")String email,@RequestParam("interest")String interest) throws  Exception{
         User user = userService.findExistingEmail(email);
         for(Interests existingData : interestService.findInterests(user)){
-            if(existingData.getUser().getEmail().equals(email)){
+            if(existingData.getInterests().equals(interest)  && existingData.getUser().getEmail().equals(email)){
                 throw new Exception("DATA_EXIST...");
             }
         }
