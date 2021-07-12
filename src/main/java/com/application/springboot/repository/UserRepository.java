@@ -111,4 +111,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("select u from  User  u where u.aboutMe.country=:country")
     List<User> findUsersFromOwnCountry(String country);
+
+    @Query( "update  User u set u = :user where u.id= :id")
+    User updateUser(User user, Integer id);
 }

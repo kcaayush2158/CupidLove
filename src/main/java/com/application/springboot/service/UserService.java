@@ -116,4 +116,8 @@ public class UserService {
     public List<User> switchGenders(String gender) {
         return userRepository.switchGender(gender);
     }
+
+    public User updateUserProfile(User user, Integer id) {
+        return  userRepository.updateUser(user,id);
+    }
 }
