@@ -96,7 +96,8 @@ public class HomeAPI {
     public ResponseEntity<User> registerUser( @RequestParam("username") String username, @RequestParam("lastName") String lastName, @RequestParam("bio") String bio, @RequestParam("interests") String interests, @RequestParam("firstName") String firstName, @RequestParam("age") String age, @RequestParam("password") String password, @RequestParam("country") String country, @RequestParam("known") String known, @RequestParam("lookingFor") String lookingFor, @RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) throws Exception {
         User user = userService.findExistingEmail(email);
         if(user ==null){
-            user = this.saveUser(username, lastName, firstName, password, email);
+            user = this.saveUser(user.getId(),username, lastName, firstName, password, email);
+            user.setProfilePhoto(user.getProfilePhoto());
             int convertedAge = Integer.parseInt(age);
             AboutMe aboutMe =  saveAboutMe(convertedAge,bio, interests, country, known, lookingFor, height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
             user.setAboutMe(aboutMe);
@@ -115,12 +116,12 @@ public class HomeAPI {
     @PostMapping("/user/update")
     public ResponseEntity<User> update( @RequestParam("username") String username, @RequestParam("lastName") String lastName, @RequestParam("bio") String bio, @RequestParam("interests") String interests, @RequestParam("firstName") String firstName, @RequestParam("age") String age, @RequestParam("country") String country, @RequestParam("known") String known, @RequestParam("lookingFor") String lookingFor, @RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) throws Exception {
         User user = userService.findExistingEmail(email);
-
-            user = saveUser(username, lastName, firstName, user.getPassword(), email);
+                user.setProfilePhoto(user.getProfilePhoto());
+            user = saveUser(user.getId(),username, lastName, firstName, user.getPassword(), email);
             int convertedAge = Integer.parseInt(age);
             AboutMe aboutMe =  saveAboutMe(convertedAge,bio, interests, country, known, lookingFor, height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
             user.setAboutMe(aboutMe);
-            userService.updateUserProfile(user, user.getId());
+            userService.saveUser(user);
             return ResponseEntity.ok().body(user);
     }
 
@@ -151,10 +152,12 @@ public class HomeAPI {
         return aboutMe;
     }
 
-    private User saveUser(String username,String lastName,  String firstName,  String password, String email) {
+    private User saveUser(int  id,String username,String lastName,  String firstName,  String password, String email) {
         User user = new User();
+        user.setId(id);
         user.setRoles(Collections.singletonList(new Role("USER")));
         user.setUsername(username);
+
         user.setCreatedDate(new Date());
         user.setPassword(bCryptPasswordEncoder.encode(password));
         user.setActive(true);

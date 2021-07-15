@@ -45,7 +45,7 @@ public class SettingController {
     // delete the user profile permanently
     @GetMapping("/profile/delete")
     public String deleteUserProfile(Principal principal, Model model) {
-        User user = userService.getAllByEmail(principal.getName());
+        User user = userService.findExistingEmail(principal.getName());
         settingService.deleteUserProfile(user.getEmail());
         return "login";
     }

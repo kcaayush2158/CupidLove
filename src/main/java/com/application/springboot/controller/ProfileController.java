@@ -167,7 +167,7 @@ public class ProfileController {
         Model model
 
     ) {
-        User user = userService.getAllByEmail(principal.getName());
+        User user = userService.findExistingEmail(principal.getName());
         user.setFirstName(firstName);
         user.setLastName(lastName);
         AboutMe aboutMe = new AboutMe();

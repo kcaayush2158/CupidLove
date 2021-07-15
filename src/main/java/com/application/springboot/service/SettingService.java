@@ -5,6 +5,8 @@ import com.application.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class SettingService {
 
@@ -16,8 +18,8 @@ public class SettingService {
         userRepository.deleteByEmail(email);
     }
 
-    public User getAllUserByEmail(String email) {
-        return userRepository.getAllByEmail(email);
+    public Optional<User> getAllUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     public User changeUserPassword(String email) {

@@ -1,5 +1,6 @@
 package com.application.springboot.service;
 
+import com.application.springboot.model.AboutMe;
 import com.application.springboot.model.User;
 import com.application.springboot.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class UserService {
         return userRepository.getUsernameAndPassword();
     }
 
-    public User getAllByEmail(String email) {
-        return userRepository.getAllByEmail(email);
+    public Optional<User> getAllByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     //when the user visits the other user profile
@@ -117,7 +118,9 @@ public class UserService {
         return userRepository.switchGender(gender);
     }
 
-    public User updateUserProfile(User user, Integer id) {
-        return  userRepository.updateUser(user,id);
+
+    public User updateUser(User user) {
+
+        return  userRepository.save(user);
     }
 }
