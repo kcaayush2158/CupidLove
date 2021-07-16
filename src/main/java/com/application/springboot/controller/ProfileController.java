@@ -1,10 +1,7 @@
 
 package com.application.springboot.controller;
 
-import com.application.springboot.model.AboutMe;
-import com.application.springboot.model.Photos;
-import com.application.springboot.model.User;
-import com.application.springboot.model.Visits;
+import com.application.springboot.model.*;
 import com.application.springboot.model.notification.Notification;
 import com.application.springboot.repository.AboutMeRepository;
 import com.application.springboot.repository.UserRepository;
@@ -147,6 +144,7 @@ public class ProfileController {
         @RequestParam("liveIn") String livein,
         @RequestParam("age") int age,
         @RequestParam("bio") String bio,
+        @RequestParam("fromAge") int fromAge, @RequestParam("toAge") int toAge,@RequestParam("description") String description,
         @RequestParam("drink") String drink,
         @RequestParam("bodyType") String bodyType,
         @RequestParam("education") String education,
@@ -158,7 +156,6 @@ public class ProfileController {
         @RequestParam("height") String height,
         @RequestParam("known") String known,
         @RequestParam("languages") String languages,
-        @RequestParam("lookingFor") String lookingFor,
         @RequestParam("relationship") String relationship,
         @RequestParam("smoke") String smoke,
         @RequestParam("workAs") String workAs,
@@ -167,6 +164,12 @@ public class ProfileController {
         Model model
 
     ) {
+        LookingFor lookingFor = new LookingFor();
+        lookingFor.setFromAge(fromAge);
+        lookingFor.setDescription(description);
+        lookingFor.setToAge(toAge);
+
+
         User user = userService.findExistingEmail(principal.getName());
         user.setFirstName(firstName);
         user.setLastName(lastName);

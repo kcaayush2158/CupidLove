@@ -1,6 +1,7 @@
 package com.application.springboot.controller;
 
 import com.application.springboot.model.AboutMe;
+import com.application.springboot.model.LookingFor;
 import com.application.springboot.model.Role;
 import com.application.springboot.model.User;
 import com.application.springboot.model.userstore.ActiveUserStore;
@@ -8,7 +9,6 @@ import com.application.springboot.repository.UserRepository;
 import com.application.springboot.service.AboutMeService;
 import com.application.springboot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -49,7 +49,7 @@ public class UserController {
      * status: working correctly
      * */
     @PostMapping("/signup")
-    public String registerUser( @RequestParam("username") String username, @RequestParam("lastName") String lastName, @RequestParam("bio") String bio, @RequestParam("interests") String interests, @RequestParam String firstName, @RequestParam("age") int age, @RequestParam("password") String password, @RequestParam("country") String country, @RequestParam("known") String known, @RequestParam("lookingFor") String lookingFor, @RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) {
+    public String registerUser( @RequestParam("username") String username, @RequestParam("lastName") String lastName, @RequestParam("fromAge") int lookingForAge, @RequestParam("lookingForToAge") int lookingForToAge,@RequestParam("lookingForToAge") String lookingForDescription,  @RequestParam("bio") String bio, @RequestParam("interests") String interests, @RequestParam String firstName, @RequestParam("age") int age, @RequestParam("password") String password, @RequestParam("country") String country, @RequestParam("known") String known,@RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) {
 //
         try {
             User existingEmail = userService.findExistingEmail(email);
@@ -64,7 +64,11 @@ public class UserController {
         }
 
         User user = saveUser(username, lastName, firstName, password, email);
-        AboutMe aboutMe =  saveAboutMe(age,bio, interests, country, known, lookingFor, height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
+        LookingFor lookingFor = new LookingFor();
+        lookingFor.setFromAge(lookingForToAge);
+        lookingFor.setDescription(lookingForDescription);
+        lookingFor.setToAge(lookingForToAge);
+        AboutMe aboutMe =  saveAboutMe(age,bio, country, known,lookingFor , height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
         user.setAboutMe(aboutMe);
         userService.saveUser(user);
         model.addAttribute("user", user);
@@ -118,10 +122,10 @@ public class UserController {
     @PostMapping("/user/aboutme/save")
     public String saveUserAboutMe(@Valid @ModelAttribute AboutMe aboutMe, Model model, @RequestParam("email")String email, Principal principal) {
         User user = userService.findExistingEmail(principal.getName());
-        saveAboutMe(aboutMe.getAge(), aboutMe.getBio(), aboutMe.getInterests(), aboutMe.getCountry(), aboutMe.getKnown(), aboutMe.getLookingFor(), aboutMe.getHeight(), aboutMe.getLiveIn(), aboutMe.getHaveKids(), aboutMe.getGender(), aboutMe.getBodyType(), aboutMe.getDrink(), aboutMe.getEducation(),aboutMe.getEyes(), aboutMe.getHair(), aboutMe.getLanguages(), aboutMe.getRelationship(), aboutMe.getSmoke(),aboutMe.getWorkAs());
+        saveAboutMe(aboutMe.getAge(), aboutMe.getBio(), aboutMe.getCountry(), aboutMe.getKnown(),aboutMe.getLookingFor(), aboutMe.getHeight(), aboutMe.getLiveIn(), aboutMe.getHaveKids(), aboutMe.getGender(), aboutMe.getBodyType(), aboutMe.getDrink(), aboutMe.getEducation(),aboutMe.getEyes(), aboutMe.getHair(), aboutMe.getLanguages(), aboutMe.getRelationship(), aboutMe.getSmoke(),aboutMe.getWorkAs());
         user.setAboutMe(aboutMe);
         model.addAttribute("aboutMe", aboutMe);
-        aboutMeService.saveAboutMe(aboutMe);;
+        aboutMeService.saveAboutMe(aboutMe);
         userService.saveUser(user);
 
         return "redirect:/";
@@ -152,7 +156,7 @@ public class UserController {
 
 
 
-    private AboutMe saveAboutMe( int age,String bio, String interests,  String country,  String known, String lookingFor, String height,  String liveIn,  String haveKids,  String gender,  String bodyType,  String drink,  String education,  String eyes,  String hair,  String languages,  String relationship,  String smoke,String workAs) {
+    private AboutMe saveAboutMe( int age,String bio, String country,  String known, LookingFor lookingFor, String height,  String liveIn,  String haveKids,  String gender,  String bodyType,  String drink,  String education,  String eyes,  String hair,  String languages,  String relationship,  String smoke,String workAs) {
         AboutMe aboutMe = new AboutMe();
         aboutMe.setAge(age);
         aboutMe.setCountry(country);
@@ -166,10 +170,11 @@ public class UserController {
         aboutMe.setHaveKids(haveKids);
         aboutMe.setHair(hair);
         aboutMe.setHeight(height);
-        aboutMe.setInterests(interests);
         aboutMe.setLanguages(languages);
         aboutMe.setLiveIn(liveIn);
-        aboutMe.setLookingFor(lookingFor);
+        lookingFor.setToAge(lookingFor.getToAge());
+        lookingFor.setDescription(lookingFor.getDescription());
+        lookingFor.setFromAge(lookingFor.getFromAge());
         aboutMe.setRelationship(relationship);
         aboutMe.setSmoke(smoke);
         aboutMe.setWorkAs(workAs);

@@ -38,11 +38,11 @@ public class User {
     private boolean isActive;
     @Size(message = "Password length should be more than 6 characters", min = 6)
     private String password;
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="id")
     @NotNull
     @Valid
     private AboutMe aboutMe;
-
     @NotNull(message = "Username cannot be empty")
     private String username;
     @Temporal(TemporalType.DATE)

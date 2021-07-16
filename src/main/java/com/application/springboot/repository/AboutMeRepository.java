@@ -15,7 +15,7 @@ public interface AboutMeRepository extends JpaRepository<AboutMe, Integer> {
 
     @Modifying(clearAutomatically = true)
     @Transactional
-    @Query("UPDATE AboutMe a set a.liveIn =:#{#aboutMe.liveIn},a.country =:#{#aboutMe.country},a.drink=:#{#aboutMe.drink} , a.bodyType = :#{#aboutMe.bodyType} , a.education =:#{#aboutMe.education} , a.eyes=:#{#aboutMe.eyes} ,a.gender=:#{#aboutMe.gender} ,a.hair=:#{#aboutMe.hair} ,a.haveKids=:#{#aboutMe.haveKids} , a.height=:#{#aboutMe.height} , a.known=:#{#aboutMe.known} , a.languages=:#{#aboutMe.languages},a.lookingFor=:#{#aboutMe.lookingFor},a.relationship=:#{#aboutMe.relationship},a.smoke=:#{#aboutMe.smoke},a.workAs=:#{#aboutMe.workAs}, a.interests=:#{#aboutMe.interests} where a.id=:id")
+    @Query("UPDATE AboutMe a set a.liveIn =:#{#aboutMe.liveIn},a.country =:#{#aboutMe.country},a.drink=:#{#aboutMe.drink} , a.bodyType = :#{#aboutMe.bodyType} , a.education =:#{#aboutMe.education} , a.eyes=:#{#aboutMe.eyes} ,a.gender=:#{#aboutMe.gender} ,a.hair=:#{#aboutMe.hair} ,a.haveKids=:#{#aboutMe.haveKids} , a.height=:#{#aboutMe.height} , a.known=:#{#aboutMe.known} , a.languages=:#{#aboutMe.languages},a.lookingFor=:#{#aboutMe.lookingFor},a.relationship=:#{#aboutMe.relationship},a.smoke=:#{#aboutMe.smoke},a.workAs=:#{#aboutMe.workAs} where a.id=:id")
     void updateAboutMe(AboutMe aboutMe, Integer id);
 
 

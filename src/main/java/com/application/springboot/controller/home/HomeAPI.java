@@ -2,6 +2,7 @@ package com.application.springboot.controller.home;
 
 
 import com.application.springboot.model.AboutMe;
+import com.application.springboot.model.LookingFor;
 import com.application.springboot.model.Role;
 import com.application.springboot.model.User;
 import com.application.springboot.service.UserService;
@@ -93,13 +94,17 @@ public class HomeAPI {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<User> registerUser( @RequestParam("username") String username, @RequestParam("lastName") String lastName, @RequestParam("bio") String bio, @RequestParam("interests") String interests, @RequestParam("firstName") String firstName, @RequestParam("age") String age, @RequestParam("password") String password, @RequestParam("country") String country, @RequestParam("known") String known, @RequestParam("lookingFor") String lookingFor, @RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) throws Exception {
+    public ResponseEntity<User> registerUser( @RequestParam("fromAge") int fromAge, @RequestParam("toAge") int toAge,@RequestParam("description") String description,@RequestParam("username") String username, @RequestParam("lastName") String lastName, @RequestParam("bio") String bio, @RequestParam("firstName") String firstName, @RequestParam("age") String age, @RequestParam("password") String password, @RequestParam("country") String country, @RequestParam("known") String known, @RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) throws Exception {
         User user = userService.findExistingEmail(email);
         if(user ==null){
             user = this.saveUser(user.getId(),username, lastName, firstName, password, email);
             user.setProfilePhoto(user.getProfilePhoto());
             int convertedAge = Integer.parseInt(age);
-            AboutMe aboutMe =  saveAboutMe(convertedAge,bio, interests, country, known, lookingFor, height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
+            LookingFor lookingFor = new LookingFor();
+            lookingFor.setFromAge(fromAge);
+            lookingFor.setToAge(toAge);
+            lookingFor.setDescription(description);
+            AboutMe aboutMe =  saveAboutMe(convertedAge,bio, country, known, lookingFor, height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
             user.setAboutMe(aboutMe);
             userService.saveUser(user);
             model.addAttribute("user", user);
@@ -114,20 +119,29 @@ public class HomeAPI {
 
 
     @PostMapping("/user/update")
-    public ResponseEntity<User> update( @RequestParam("username") String username, @RequestParam("lastName") String lastName, @RequestParam("bio") String bio, @RequestParam("interests") String interests, @RequestParam("firstName") String firstName, @RequestParam("age") String age, @RequestParam("country") String country, @RequestParam("known") String known, @RequestParam("lookingFor") String lookingFor, @RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) throws Exception {
+    public ResponseEntity<User> update( @RequestParam("username") String username,@RequestParam("fromAge") int fromAge, @RequestParam("toAge") int toAge, @RequestParam("description") String description, @RequestParam("lastName") String lastName, @RequestParam("bio") String bio, @RequestParam("interests") String interests, @RequestParam("firstName") String firstName, @RequestParam("age") String age, @RequestParam("country") String country, @RequestParam("known") String known,@RequestParam("height") String height, @RequestParam String liveIn, @RequestParam String haveKids, @RequestParam("email") String email, @RequestParam String gender, @RequestParam String bodyType, @RequestParam String drink, @RequestParam String education, @RequestParam String eyes, @RequestParam String hair, @RequestParam String languages, @RequestParam String relationship, @RequestParam String smoke, @RequestParam String workAs, Model model) throws Exception {
         User user = userService.findExistingEmail(email);
                 user.setProfilePhoto(user.getProfilePhoto());
             user = saveUser(user.getId(),username, lastName, firstName, user.getPassword(), email);
             int convertedAge = Integer.parseInt(age);
-            AboutMe aboutMe =  saveAboutMe(convertedAge,bio, interests, country, known, lookingFor, height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
+            LookingFor lookingFor = new LookingFor();
+            lookingFor.setFromAge(fromAge);
+            lookingFor.setToAge(toAge);
+            lookingFor.setDescription(description);
+            AboutMe aboutMe =  saveAboutMe(convertedAge,bio, country, known, lookingFor, height, liveIn, haveKids, gender, bodyType, drink, education, eyes, hair, languages, relationship, smoke, workAs);
             user.setAboutMe(aboutMe);
             userService.saveUser(user);
             return ResponseEntity.ok().body(user);
     }
 
 
-    private AboutMe saveAboutMe(int age, String bio, String interests, String country, String known, String lookingFor, String height, String liveIn, String haveKids, String gender, String bodyType, String drink, String education, String eyes, String hair, String languages, String relationship, String smoke, String workAs) {
+    private AboutMe saveAboutMe(int age, String bio,String country, String known, LookingFor lookingFor, String height, String liveIn, String haveKids, String gender, String bodyType, String drink, String education, String eyes, String hair, String languages, String relationship, String smoke, String workAs) {
         AboutMe aboutMe = new AboutMe();
+
+        lookingFor.setToAge(lookingFor.getToAge());
+        lookingFor.setFromAge(lookingFor.getFromAge());
+        lookingFor.setDescription(lookingFor.getDescription());
+
         aboutMe.setAge(age);
         aboutMe.setCountry(country);
         aboutMe.setBodyType(bodyType);
@@ -140,7 +154,7 @@ public class HomeAPI {
         aboutMe.setHaveKids(haveKids);
         aboutMe.setHair(hair);
         aboutMe.setHeight(height);
-        aboutMe.setInterests(interests);
+        aboutMe.setLookingFor(lookingFor);
         aboutMe.setLanguages(languages);
         aboutMe.setLiveIn(liveIn);
         aboutMe.setLookingFor(lookingFor);
@@ -166,5 +180,7 @@ public class HomeAPI {
         user.setEmail(email);
         return user;
     }
+
+
 
 }

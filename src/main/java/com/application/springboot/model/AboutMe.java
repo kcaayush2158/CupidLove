@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
@@ -28,8 +29,10 @@ public class AboutMe {
     private String haveKids;
     @NotNull(message = "Known cannot be empty")
     private String known;
-    @Lob
-    private String lookingFor;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinTable(name="id")
+    private LookingFor lookingFor;
     @NotNull(message = "Smoke cannot be empty")
     private String smoke;
     @NotNull(message = "Drink cannot be empty")
@@ -55,9 +58,6 @@ public class AboutMe {
     @NotNull(message = "Bio cannot be empty")
     @Lob
     private String bio;
-    @Lob
-    @NotNull(message = "Interests cannot be empty")
-    private String interests;
     @NotNull(message = "Country cannot be empty")
     private String country;
 

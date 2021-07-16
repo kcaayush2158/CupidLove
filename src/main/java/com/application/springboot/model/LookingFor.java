@@ -1,6 +1,5 @@
 package com.application.springboot.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,12 +10,12 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Interests {
+public class LookingFor {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private int id;
-    @ManyToOne(cascade = CascadeType.ALL,fetch = FetchType.LAZY)
-    private User user;
-    private String interest;
+    private int fromAge;
+    private int toAge;
+    private String description;
 
 }
