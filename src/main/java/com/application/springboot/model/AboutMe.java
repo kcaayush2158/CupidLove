@@ -30,8 +30,7 @@ public class AboutMe {
     @NotNull(message = "Known cannot be empty")
     private String known;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinTable(name="id")
+    @OneToOne(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private LookingFor lookingFor;
     @NotNull(message = "Smoke cannot be empty")
     private String smoke;

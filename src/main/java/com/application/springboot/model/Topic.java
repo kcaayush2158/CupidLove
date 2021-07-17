@@ -13,7 +13,7 @@ public class Topic {
     private String topicName;
     private String topicQuestion;
     private String topicAnswer;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
     private User user;
 
 
